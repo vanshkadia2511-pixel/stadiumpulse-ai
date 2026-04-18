@@ -66,14 +66,23 @@
 ## 🏗️ Project Structure
 
 ```text
-src/
-├── components/       # UI Components (Crowd, Assistant, Map)
-├── context/          # StadiumContext for global state
-├── data/             # Static graph and mock crowd data
-├── firebase/         # Firestore services and simulator
-├── hooks/            # Custom hooks (useZones, useCrowdOracle, useGeminiChat)
-├── services/         # API services (Gemini, Maps)
-└── utils/            # Core algorithms (Dijkstra, Pressure Score)
+stadiumpulse-ai/
+├── src/
+│   ├── components/       # UI Components (Crowd, Assistant, Map)
+│   ├── context/          # StadiumState for global state management
+│   ├── data/             # Static stadium graph and mock data
+│   ├── firebase/         # Firestore config and service layer
+│   ├── hooks/            # Custom React hooks (AI, Data, Algorithms)
+│   ├── pages/            # Application views (Dashboard)
+│   ├── services/         # External API integrations (Gemini, Maps)
+│   └── utils/            # Core logic (Dijkstra, Pressure Scoring)
+├── public/               # Static assets and icons
+├── Dockerfile            # Cloud Run deployment configuration
+├── seed.mjs              # Firestore database initialization script
+├── firestore.rules       # Database security policies
+├── firestore.indexes.json# Custom database indexes
+├── tailwind.config.js    # Visual design system configuration
+└── vite.config.js        # Build tool configuration
 ```
 
 ## 📜 License
