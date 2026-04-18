@@ -1,0 +1,14 @@
+[
+  { "id": "zone_north_gate", "name": "North Gate", "current_occupancy_percentage": 85, "wait_time_minutes": 15, "capacity": 5000, "trend": "rising", "lat": 40.7128, "lng": -74.0060 },
+  { "id": "zone_south_gate", "name": "South Gate", "current_occupancy_percentage": 40, "wait_time_minutes": 5, "capacity": 5000, "trend": "falling", "lat": 40.7110, "lng": -74.0060 },
+  { "id": "zone_east_gate", "name": "East Gate", "current_occupancy_percentage": 60, "wait_time_minutes": 8, "capacity": 3000, "trend": "stable", "lat": 40.7119, "lng": -74.0040 },
+  { "id": "zone_west_gate", "name": "West Gate", "current_occupancy_percentage": 20, "wait_time_minutes": 2, "capacity": 3000, "trend": "falling", "lat": 40.7119, "lng": -74.0080 },
+  { "id": "zone_concession_a", "name": "Concession A", "current_occupancy_percentage": 95, "wait_time_minutes": 20, "capacity": 1000, "trend": "rising", "lat": 40.7125, "lng": -74.0055 },
+  { "id": "zone_concession_b", "name": "Concession B", "current_occupancy_percentage": 75, "wait_time_minutes": 12, "capacity": 1000, "trend": "rising", "lat": 40.7115, "lng": -74.0055 },
+  { "id": "zone_concession_c", "name": "Concession C", "current_occupancy_percentage": 30, "wait_time_minutes": 4, "capacity": 1000, "trend": "falling", "lat": 40.7115, "lng": -74.0065 },
+  { "id": "zone_concession_d", "name": "Concession D", "current_occupancy_percentage": 50, "wait_time_minutes": 8, "capacity": 1000, "trend": "stable", "lat": 40.7125, "lng": -74.0065 },
+  { "id": "zone_restroom_1", "name": "Restroom 1", "current_occupancy_percentage": 80, "wait_time_minutes": 10, "capacity": 200, "trend": "stable", "lat": 40.7122, "lng": -74.0050 },
+  { "id": "zone_restroom_2", "name": "Restroom 2", "current_occupancy_percentage": 25, "wait_time_minutes": 1, "capacity": 200, "trend": "falling", "lat": 40.7118, "lng": -74.0070 },
+  { "id": "zone_main_entry", "name": "Main Entry", "current_occupancy_percentage": 90, "wait_time_minutes": 25, "capacity": 8000, "trend": "rising", "lat": 40.7120, "lng": -74.0060 },
+  { "id": "zone_vip_lounge", "name": "VIP Lounge", "current_occupancy_percentage": 10, "wait_time_minutes": 0, "capacity": 500, "trend": "stable", "lat": 40.7120, "lng": -74.0050 }
+]
