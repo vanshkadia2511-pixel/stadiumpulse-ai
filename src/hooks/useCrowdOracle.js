@@ -1,4 +1,4 @@
-import { useStadium } from '../context/StadiumContext';
+import { useStadium } from '../context/StadiumState';
 import { buildWeightedGraph } from '../data/stadiumGraph';
 import { findBestRoute, generateSuggestions, predictWaitTime } from '../utils/crowdAlgorithm';
 

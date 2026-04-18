@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useStadium } from '../context/StadiumContext';
+import { useStadium } from '../context/StadiumState';
 import { useCrowdOracle } from '../hooks/useCrowdOracle';
 import SectionCard from '../components/crowd/SectionCard';
 import ChatPanel from '../components/assistant/ChatPanel';

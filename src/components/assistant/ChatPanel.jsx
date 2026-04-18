@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { StadiumContext } from '../../context/StadiumContext';
+import { StadiumContext } from '../../context/StadiumState';
 import { useGeminiChat } from '../../hooks/useGeminiChat';
 import MessageInput from './MessageInput';
 import SuggestionChips from './SuggestionChips';

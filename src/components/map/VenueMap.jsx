@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
-import { StadiumContext } from '../../context/StadiumContext';
+import { StadiumContext } from '../../context/StadiumState';
 
 export default function VenueMap() {
   const { zones } = useContext(StadiumContext);
