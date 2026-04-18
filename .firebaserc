@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "stadiumpulse-ai"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }

@@ -6,7 +6,8 @@ import SuggestionChips from './SuggestionChips';
 import ReactMarkdown from 'react-markdown';
 
 export default function ChatPanel() {
-  const { zones } = useContext(StadiumContext);
+  const { state } = useContext(StadiumContext);
+  const { zones } = state;
   const { messages, isTyping, error, sendMessage } = useGeminiChat(zones);
   const messagesEndRef = useRef(null);
 

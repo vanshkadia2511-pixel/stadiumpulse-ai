@@ -3,7 +3,8 @@ import { APIProvider, Map, AdvancedMarker, Pin } from '@vis.gl/react-google-maps
 import { StadiumContext } from '../../context/StadiumState';
 
 export default function VenueMap() {
-  const { zones } = useContext(StadiumContext);
+  const { state } = useContext(StadiumContext);
+  const { zones } = state;
   const MAPS_API_KEY = import.meta.env.VITE_MAPS_API_KEY;
 
   if (!MAPS_API_KEY) {
