@@ -4,6 +4,7 @@ import { useZones } from '../hooks/useZones';
 import { startSimulation, stopSimulation } from '../firebase/simulationEngine';
 import { computePressureScore } from '../utils/crowdAlgorithm';
 
+// Context for global stadium state and real-time updates
 export const StadiumContext = createContext();
 
 const initialState = {
