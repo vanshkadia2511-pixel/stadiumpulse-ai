@@ -4,8 +4,8 @@ import { useZones } from '../hooks/useZones';
 import { startSimulation, stopSimulation } from '../firebase/simulationEngine';
 import { computePressureScore } from '../utils/crowdAlgorithm';
 
-// Context for global stadium state and real-time updates
-export const StadiumContext = createContext();
+const StadiumContext = createContext();
+export { StadiumContext };
 
 const initialState = {
   zones: mockData.map(z => ({ ...z, pressureScore: computePressureScore(z) })),
