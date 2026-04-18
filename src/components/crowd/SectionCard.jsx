@@ -1,16 +1,23 @@
 import React from 'react';
 import IntensityBadge from './IntensityBadge';
 import CrowdMeter from './CrowdMeter';
+import ReportButton from './ReportButton';
 
 export default function SectionCard({ zone }) {
+  const labelId = `zone-label-${zone.id}`;
+
   return (
-    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:-translate-y-1 transition-transform duration-300 group cursor-pointer animate-fade-in relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+    <div 
+      role="article"
+      aria-labelledby={labelId}
+      className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 hover:-translate-y-1 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group cursor-pointer animate-fade-in relative overflow-hidden flex flex-col justify-between h-full focus-within:ring-2 focus-within:ring-pulse-red outline-none"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
       
-      <div className="relative z-10">
+      <div className="relative z-10 flex-1">
         <div className="flex justify-between items-start mb-4">
           <div>
-            <h3 className="text-white font-display font-semibold text-lg">{zone.name}</h3>
+            <h3 id={labelId} className="text-white font-display font-semibold text-lg">{zone.name}</h3>
             <p className="text-gray-400 text-xs">ID: {zone.id.replace('zone_', '').replace(/_/g, ' ').toUpperCase()}</p>
           </div>
           <IntensityBadge occupancy={zone.current_occupancy_percentage} />
@@ -42,9 +49,13 @@ export default function SectionCard({ zone }) {
           </div>
           <div className="flex flex-col text-right">
             <span className="text-gray-400 text-[10px] uppercase font-bold tracking-widest">Capacity</span>
-            <span className="text-gray-300 font-medium">{zone.capacity.toLocaleString()}</span>
+            <span className="text-gray-300 font-medium">{zone.capacity?.toLocaleString()}</span>
           </div>
         </div>
+      </div>
+      
+      <div className="relative z-10">
+        <ReportButton zoneId={zone.id} zoneName={zone.name} />
       </div>
     </div>
   );

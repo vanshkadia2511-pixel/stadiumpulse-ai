@@ -1,24 +1,41 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import mockData from '../data/mockCrowd.json';
+import { useZones } from '../hooks/useZones';
+import { startSimulation, stopSimulation } from '../firebase/simulationEngine';
+import { computePressureScore } from '../utils/crowdAlgorithm';
 
 const StadiumContext = createContext();
 
 const initialState = {
-  zones: mockData,
-  mode: 'local' // local or live
+  zones: mockData.map(z => ({ ...z, pressureScore: computePressureScore(z) })),
+  history: {}, // { zoneId: [{ wait_time_minutes, current_occupancy_percentage, timestamp }] }
+  mode: import.meta.env.VITE_DEMO_MODE === 'true' ? 'demo' : 'live'
 };
 
 function stadiumReducer(state, action) {
   switch (action.type) {
-    case 'SET_ZONES':
-      return { ...state, zones: action.payload };
-    case 'UPDATE_ZONE':
-      return {
-        ...state,
-        zones: state.zones.map(zone =>
-          zone.id === action.payload.id ? { ...zone, ...action.payload } : zone
-        )
-      };
+    case 'SET_ZONES': {
+      const newZones = action.payload.map(z => ({
+        ...z,
+        pressureScore: computePressureScore(z)
+      }));
+      
+      const newHistory = { ...state.history };
+      newZones.forEach(z => {
+        if (!newHistory[z.id]) newHistory[z.id] = [];
+        newHistory[z.id].push({
+          wait_time_minutes: z.wait_time_minutes,
+          current_occupancy_percentage: z.current_occupancy_percentage,
+          timestamp: new Date().toISOString()
+        });
+        // Keep only last 5 readings
+        if (newHistory[z.id].length > 5) {
+          newHistory[z.id].shift();
+        }
+      });
+
+      return { ...state, zones: newZones, history: newHistory };
+    }
     case 'SET_MODE':
       return { ...state, mode: action.payload };
     default:
@@ -29,32 +46,19 @@ function stadiumReducer(state, action) {
 export function StadiumProvider({ children }) {
   const [state, dispatch] = useReducer(stadiumReducer, initialState);
 
-  // Simulation Loop
+  // Subscribe to live Firestore updates
+  useZones(dispatch);
+
+  // Simulation Loop for Demo Mode
   useEffect(() => {
-    if (state.mode === 'local') {
-      const interval = setInterval(() => {
-        const updatedZones = state.zones.map(zone => {
-          const drift = Math.floor(Math.random() * 11) - 5; // -5 to +5
-          let newOccupancy = zone.current_occupancy_percentage + drift;
-          newOccupancy = Math.max(0, Math.min(100, newOccupancy));
-          
-          let trend = 'stable';
-          if (drift > 2) trend = 'rising';
-          else if (drift < -2) trend = 'falling';
-          
-          return {
-            ...zone,
-            current_occupancy_percentage: newOccupancy,
-            trend
-          };
-        });
-        
-        dispatch({ type: 'SET_ZONES', payload: updatedZones });
-      }, 8000);
-      
-      return () => clearInterval(interval);
+    if (state.mode === 'demo') {
+      startSimulation();
+    } else {
+      stopSimulation();
     }
-  }, [state.zones, state.mode]);
+    
+    return () => stopSimulation();
+  }, [state.mode]);
 
   return (
     <StadiumContext.Provider value={{ state, dispatch }}>
