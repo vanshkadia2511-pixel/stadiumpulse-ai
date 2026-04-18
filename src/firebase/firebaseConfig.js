@@ -11,8 +11,16 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-export const auth = getAuth(app);
+const isConfigValid = !!firebaseConfig.apiKey && !!firebaseConfig.projectId;
 
-signInAnonymously(auth).catch(console.error);
+if (!isConfigValid) {
+  console.warn("Firebase configuration is missing. Ensure VITE_FIREBASE_* environment variables are set.");
+}
+
+const app = isConfigValid ? initializeApp(firebaseConfig) : null;
+export const db = app ? getFirestore(app) : null;
+export const auth = app ? getAuth(app) : null;
+
+if (auth) {
+  signInAnonymously(auth).catch(console.error);
+}
