@@ -4,7 +4,7 @@ import { useZones } from '../hooks/useZones';
 import { startSimulation, stopSimulation } from '../firebase/simulationEngine';
 import { computePressureScore } from '../utils/crowdAlgorithm';
 
-const StadiumContext = createContext();
+export const StadiumContext = createContext();
 
 const initialState = {
   zones: mockData.map(z => ({ ...z, pressureScore: computePressureScore(z) })),
